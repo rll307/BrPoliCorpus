@@ -14,7 +14,10 @@ For the curret time, a single dataset is available.
 
 ## Instalation
 
-remotes::install_github("rll307/BrPoliCorpus")
+```
+library(devtools)
+install_github("rll307/BrPoliCorpus")
+```
 
 ## Contribution
 
