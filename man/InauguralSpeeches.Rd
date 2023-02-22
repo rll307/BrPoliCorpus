@@ -5,7 +5,7 @@
 \alias{InauguralSpeeches}
 \title{Data of all Inaugural Speeches delivered by Brazilian Presidents}
 \format{
-A Data frame  34 rows and 14 columns
+A Data frame  35 rows and 14 columns
 \describe{
 \item{\code{Discourse_Number}}{dbl ordering number}
 \item{\code{President_Terms} }{dbl Which term this diuscourse is about. Some presidents served more than one time}

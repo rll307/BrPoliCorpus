@@ -8,7 +8,7 @@
 #' In the case of 1, the Vice president José Sarney took office and delivered the speech. In the case of 2, the speeches were not included. 
 #' 
 #'
-#' @format A Data frame  34 rows and 14 columns
+#' @format A Data frame  35 rows and 14 columns
 #' \describe{
 #'   \item{`Discourse_Number`}{dbl ordering number}
 #'   \item{`President_Terms` }{dbl Which term this diuscourse is about. Some presidents served more than one time} 
