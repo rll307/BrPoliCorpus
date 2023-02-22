@@ -7,6 +7,6 @@ bibentry(bibtype = "software",
   author = c(person("Rodrigo Esteves", "de Lima-Lopes")),
   title = "BrPoliCorpus: Brazilian Political Corpus",
   url = {https://github.com/rll307/BrPoliCorpus.git},
-  version = "0.0.0.9000",
+  version = "0.0.0.1",
   year = "2022",
 }
