@@ -1,0 +1,3 @@
+#' A character string
+#'
+"InauguralSpeeches"

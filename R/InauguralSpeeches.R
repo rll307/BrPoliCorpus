@@ -25,5 +25,8 @@
 #'   \item{`text`}{chr denoting the speech itself}
 #'   
 #' }
-#' @source \url{https://www12.senado.leg.br/} and \url{https://www.gov.br/planalto/pt-br}
+#' @source \url{https://www12.senado.leg.br/} and \url{https://www.gov.br/planalto/pt-br} and some personal transcriptions. 
+#' 
 "InauguralSpeeches"
+
+NULL
