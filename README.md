@@ -63,7 +63,7 @@ The following researchers have contributed to coding this corpus:
    - Coding, data scraping
 - [Dariia Shamgunova][def4]  (TU-Darmstadt)
    - Coding, data scraping
-- [Rodrigo Dornelles][def5] (independent Researcher)
+- [Rodrigo Dornelles][def5] (Independent Researcher)
    - Coding, data scraping
 ## Acknowledgments
 
