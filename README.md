@@ -8,7 +8,7 @@ This is the version 1.0 of the package **BrPoliCorpus** (Brazilian Political Cor
 
 ## Data
 
-For the current time, the following datasets are available
+For the current time, the following datasets are available:
 
 - Inaugural Speeches: A set of Brazilian President's Inaugural Speeches.
   - Updated until 01/01/2023
@@ -33,11 +33,11 @@ For the current time, the following datasets are available
 
 ### Organisation of each module
 
-Each module is distributed as a CSV files containing the text and a lot of metadata regarding the text. For those who are downloading the CSV file, keep in mind that a column of the file contains the text. For use in ordinary Corpus Linguistics software, like WordSmith Tools and Anticonc, this columns have to be extracted and saved as a single text file. If you have interest in doing so, please let me know. 
+Each module is distributed as a CSV files containing the text and some metadata regarding the text.The CSV files can be downloaded individually (see bellow) or imported as a R Dataframe. For those who are downloading the CSV file, keep in mind that a column contains the text, but others are metadata. For use in ordinary Corpus Linguistics software, like WordSmith Tools and Anticonc, these columns have to be extracted and saved as single text files. If you have interest in doing so, please let me know. 
 
 ## Availability
 
-This date is available in both CSV for free download and as a set of R commands for integrating data into R environment.
+This data is available in both CSV for free download and as a set of R commands for integrating data into R environment.
 
 - Availability on CSV data might be [found here](doc/CSV_Download.md). 
 - The R package has a set of functions responsible for downloading specific pieces of data. Please, see the [vignette](vignettes/) for a more detailed discussion.
@@ -53,7 +53,7 @@ In R, this package might be installed using `devtools`
 
 ## Contribution
 
-The following researchers have contributed to coding this corpus:
+The following researchers have contributed to this corpus:
 
 - [Rodrigo Esteves de Lima-Lopes][def] (UNICAMP)
     - Coding, data scraping, corpus conceptualisation, package building
