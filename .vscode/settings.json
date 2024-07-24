@@ -1,0 +1,8 @@
+{
+    "r.rpath.linux": "/usr/bin/R",
+    "r.rterm.linux": "/home/rll307/.local/bin/radian",
+    "cSpell.language": "en,en-GB,en-US,pt-BR,de",
+    "cSpell.enableFiletypes": [
+        "rmd"
+    ]
+}

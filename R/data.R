@@ -1,3 +1,0 @@
-#' A character string
-#'
-"InauguralSpeeches"

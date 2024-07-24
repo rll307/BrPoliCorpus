@@ -1,0 +1,56 @@
+---
+title: "BrPoliCorpus: Brazilian Political Corpus"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{BrPoliCorpus}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(BrPoliCorpus)
+```
+
+by [Rodrigo Esteves de Lima-Lopes](mailto:rll307@unicamp.br) (Universidade Estadual de Campinas)
+
+# Introduction
+BrPoliCorpus is a corpus consisting of Brazilian official Brazilian documents. It can be used both as a R package or a set of CSV files freely downloadable here. This manual is dedicated exclusively for the R package basic usage. 
+
+# Data
+
+BrPoliCorpus consists of over 440 billions words. Such large amount of data could not be distributed through GitHub or any other package hosting services. Each time a data function is called, the package will try to download the data from UNICAMP's servers into your R environment. 
+
+# Commands
+Here some important commands that will help you out through the corpus:
+
+`download_index()`
+
+Creates six data frames in your environment:
+
+1. IndexProgrammes:
+  - Indexes all government proposals available.
+2. IndexInauguralSpeeches: 
+  - Indexes all Inaugural Speeches available.
+3. IndexFloorPlenaries
+  - Indexes all Floor Plenaries available.
+4. IndexCPI
+  - Indexes all Congress Committees of Inquiry available.
+5. IndexCommittees
+  - Indexes all Congress Committees (_not Inquiry_) available.
+6. GeneralIndex
+  - Indexes all commands available.
+
+For example `download_Brasil_president_2014()` downloads the government proposals for the candidates of the Brazilian Presidency in 2014. A common usage would be:
+
+```{r eval=FALSE, echo=TRUE}
+Brasil_2024 <- download_Brasil_president_2014()
+```
+
+This creates a data frame with this part of the corpus. Please, refer to `GeneralIndex` for the whole set of commands. The other data frames mentioned above will bring you necessary details, such as the date and the nature of each dataset. 

@@ -1,0 +1,12 @@
+## R package reference generated from DESCRIPTION metadata
+citation(auto = meta)
+
+## Software
+
+bibentry(bibtype = "software",
+  author = c(person("Rodrigo Esteves", "de Lima-Lopes")),
+  title = "BrPoliCorpus: Brazilian Political Corpus",
+  url = {https://github.com/rll307/BrPoliCorpus.git},
+  version = "1.0",
+  year = "2024",
+}
