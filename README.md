@@ -33,7 +33,7 @@ For the current time, the following datasets are available:
 
 ### Organisation of each module
 
-Each module is distributed as a CSV files containing the text and some metadata regarding the text.The CSV files can be downloaded individually (see bellow) or imported as a R Dataframe. For those who are downloading the CSV file, keep in mind that a column contains the text, but others are metadata. For use in ordinary Corpus Linguistics software, like WordSmith Tools and Anticonc, these columns have to be extracted and saved as single text files. If you have interest in doing so, please let me know. 
+Each module is distributed as a CSV file containing the text and some metadata regarding the text.The CSV files can be downloaded individually (see bellow) or imported as a R Dataframe. For those who are downloading the CSV file, keep in mind that a column contains the text, but others are metadata. For use in ordinary Corpus Linguistics software, like WordSmith Tools and Anticonc, these columns have to be extracted and saved as single text files. If you have interest in doing so, please let me know. 
 
 ## Availability
 
