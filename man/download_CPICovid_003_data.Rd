@@ -14,8 +14,10 @@ download_CPICovid_003_data()
 A data frame containing the dataset.
 
 A data frame containing the dataset.
+df <- download_CPICovid_003_data()
 
 A data frame containing the dataset.
+df <- download_CPICovid_003_data()
 }
 \description{
 Downloads the dataset from the specified URL and imports it as a data frame.
@@ -25,7 +27,5 @@ Downloads the dataset from the specified URL and imports it as a data frame.
 Downloads the dataset from the specified URL and imports it as a data frame.
 }
 \examples{
-df <- download_CPICovid_003_data()
-df <- download_CPICovid_003_data()
 df <- download_CPICovid_003_data()
 }

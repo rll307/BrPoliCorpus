@@ -8,10 +8,8 @@ download_Governador_AC_2018()
 }
 \value{
 A data frame containing the dataset.
+df <- download_Governador_AC_2018()
 }
 \description{
 Downloads the dataset from the specified URL and imports it as a data frame.
-}
-\examples{
-df <- download_Governador_AC_2018()
 }

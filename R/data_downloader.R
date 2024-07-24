@@ -17,61 +17,67 @@ download_dataset <- function(url) {
   df <- readr::read_csv(temp_file)
   return(df)
 }
-
-#' Download and Import RData File
 #'
-#' Downloads an RData file from a specified URL and loads it into the R environment.
+#'#' Download and Import Multiple CSV Files
 #'
-#' @param url The URL of the RData file.
-#' @return The loaded R object.
-#' @examples
-#' obj <- download_rdata("https://example.com/data.RData")
-#' @export
-download_rdata <- function(url) {
-  temp_file <- tempfile(fileext = ".RData")
-  if (grepl("drive.google.com", url)) {
-    url <- gsub("file/d/", "uc?export=download&id=", url)
-    url <- gsub("/view.*", "", url)
-  }
-  httr::GET(url, httr::write_disk(temp_file, overwrite = TRUE))
-  load(temp_file)
-  return(get(ls()[1]))
-}
-#' Download Three CSV Files from Google Drive and Import as Data Frames
-#'
-#' Downloads three CSV files from specified Google Drive URLs and imports them as data frames.
+#' Downloads six CSV files from specified Google Drive URLs and imports them as data frames into the specified environment.
 #'
 #' @param url1 The URL of the first dataset.
 #' @param url2 The URL of the second dataset.
 #' @param url3 The URL of the third dataset.
-#' @param url4 The URL of the third dataset.
-#' @param url5 The URL of the third dataset.
+#' @param url4 The URL of the fourth dataset.
+#' @param url5 The URL of the fifth dataset.
+#' @param url6 The URL of the sixth dataset.
 #' @param names A vector of names for the data frames.
 #' @param env The environment where the data frames will be created. Defaults to the global environment.
 #' @examples
-
 #' download_index(
-#' "https://drive.google.com/uc?export=download&id=1dhpEzzUNm4Eufs2v3XIbG8sv6AwPXonm",
-#'  "https://drive.google.com/uc?export=download&id=1E09VqeMx6eRVUwfJHI06cxiyxvZbvCo1",
-#'  "https://drive.google.com/uc?export=download&id=1O0g1iN1dH-mx9mStFNmPtjn1tFZh5uxi",
-#'  "https://drive.google.com/uc?export=download&id=1LGxgtABI01PcWhgCqbOucb-PV6jJSSWA",
-#'  "https://drive.google.com/uc?export=download&id=13ZhnyjZv_vfy20i_z7Mlgj30NkOOZF-a",
-#'  "https://drive.google.com/uc?export=download&id=1FKdY0fQLyClxFALYuBl-t-JU7PPojX0u"
-#'  names = c("IndexProgrammes", "IndexInauguralSpeeches", "IndexFloorPlenaries", "IndexCPI","IndexCommittees","GeneralIndex")
+#'   "https://drive.google.com/uc?export=download&id=1FKdY0fQLyClxFALYuBl-t-JU7PPojX0u",
+#'   "https://drive.google.com/uc?export=download&id=13ZhnyjZv_vfy20i_z7Mlgj30NkOOZF-a",
+#'   "https://drive.google.com/uc?export=download&id=1LGxgtABI01PcWhgCqbOucb-PV6jJSSWA",
+#'   "https://drive.google.com/uc?export=download&id=1O0g1iN1dH-mx9mStFNmPtjn1tFZh5uxi",
+#'   "https://drive.google.com/uc?export=download&id=1E09VqeMx6eRVUwfJHI06cxiyxvZbvCo1",
+#'   "https://drive.google.com/uc?export=download&id=1dhpEzzUNm4Eufs2v3XIbG8sv6AwPXonm",
+#'   names = c(
+#' "IndexFunctions", 
+#' "IndexCommittees",
+#'  "IndexCPI", 
+#' "IndexFilesFloor", 
+#' "IndexInaugural",
+#' "IndexProposals")
 #' )
 #' @export
+download_index <- function(
+    url1, url2, url3, url4, url5, url6,
+    names = c("IndexFunctions", 
+    "IndexCommittees",
+    "IndexCPI", 
+    "IndexFilesFloor", 
+    "IndexInaugural", 
+    "IndexProposals"),
+    env = .GlobalEnv) {
 
-download_index <- function(url1, url2, url3, url4, url5, names = c("IndexProgrammes", "IndexInauguralSpeeches", "IndexFloorPlenaries", "IndexCPI","IndexCommittees","GeneralIndex"), env = .GlobalEnv) {
+  # Define the URLs and names
   urls <- c(
-    "https://drive.google.com/uc?export=download&id=1dhpEzzUNm4Eufs2v3XIbG8sv6AwPXonm",
-    "https://drive.google.com/uc?export=download&id=1E09VqeMx6eRVUwfJHI06cxiyxvZbvCo1",
-    "https://drive.google.com/uc?export=download&id=1O0g1iN1dH-mx9mStFNmPtjn1tFZh5uxi",
-    "https://drive.google.com/uc?export=download&id=1LGxgtABI01PcWhgCqbOucb-PV6jJSSWA",
+    "https://drive.google.com/uc?export=download&id=1FKdY0fQLyClxFALYuBl-t-JU7PPojX0u",
     "https://drive.google.com/uc?export=download&id=13ZhnyjZv_vfy20i_z7Mlgj30NkOOZF-a",
-    "https://drive.google.com/uc?export=download&id=1FKdY0fQLyClxFALYuBl-t-JU7PPojX0u"
-  )
+    "https://drive.google.com/uc?export=download&id=1LGxgtABI01PcWhgCqbOucb-PV6jJSSWA",
+    "https://drive.google.com/uc?export=download&id=1O0g1iN1dH-mx9mStFNmPtjn1tFZh5uxi",
+    "https://drive.google.com/uc?export=download&id=1E09VqeMx6eRVUwfJHI06cxiyxvZbvCo1",
+    "https://drive.google.com/uc?export=download&id=1dhpEzzUNm4Eufs2v3XIbG8sv6AwPXonm")
+  
+  # Check if the number of names matches the number of URLs
+  if (length(urls) != length(names)) {
+    stop("The number of URLs and names must be the same.")
+  }
+  
+  # Download and import datasets
   dfs <- lapply(urls, download_dataset)
+  
+  # Assign names to the data frames
   names(dfs) <- names
+  
+  # Place data frames into the specified environment
   list2env(dfs, envir = env)
 }
 
@@ -108,7 +114,6 @@ download_Brasil_president_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Brasil_president_2018()
 #' @export
 download_Brasil_president_2018 <- function() {
@@ -122,7 +127,6 @@ download_Brasil_president_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Brasil_president_2022()
 #' @export
 download_Brasil_president_2022 <- function() {
@@ -150,7 +154,6 @@ download_Governador_AC_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_AC_2018()
 #' @export
 download_Governador_AC_2018 <- function() {
@@ -164,7 +167,6 @@ download_Governador_AC_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_AC_2022()
 #' @export
 download_Governador_AC_2022 <- function() {
@@ -178,7 +180,6 @@ download_Governador_AC_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_AL_2018()
 #' @export
 download_Governador_AL_2018 <- function() {
@@ -192,7 +193,6 @@ download_Governador_AL_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_AL_2022()
 #' @export
 download_Governador_AL_2022 <- function() {
@@ -206,7 +206,6 @@ download_Governador_AL_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_AM_2014()
 #' @export
 download_Governador_AM_2014 <- function() {
@@ -220,7 +219,6 @@ download_Governador_AM_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_AM_2018()
 #' @export
 download_Governador_AM_2018 <- function() {
@@ -234,7 +232,6 @@ download_Governador_AM_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_AM_2022()
 #' @export
 download_Governador_AM_2022 <- function() {
@@ -248,7 +245,6 @@ download_Governador_AM_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_AP_2014()
 #' @export
 download_Governador_AP_2014 <- function() {
@@ -262,7 +258,6 @@ download_Governador_AP_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_AP_2018()
 #' @export
 download_Governador_AP_2018 <- function() {
@@ -276,7 +271,6 @@ download_Governador_AP_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_AP_2022()
 #' @export
 download_Governador_AP_2022 <- function() {
@@ -290,7 +284,6 @@ download_Governador_AP_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_BA_2014()
 #' @export
 download_Governador_BA_2014 <- function() {
@@ -304,7 +297,6 @@ download_Governador_BA_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_BA_2018()
 #' @export
 download_Governador_BA_2018 <- function() {
@@ -318,7 +310,6 @@ download_Governador_BA_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_BA_2022()
 #' @export
 download_Governador_BA_2022 <- function() {
@@ -332,7 +323,6 @@ download_Governador_BA_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_CE_2014()
 #' @export
 download_Governador_CE_2014 <- function() {
@@ -346,7 +336,6 @@ download_Governador_CE_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_CE_2018()
 #' @export
 download_Governador_CE_2018 <- function() {
@@ -360,7 +349,6 @@ download_Governador_CE_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_CE_2022()
 #' @export
 download_Governador_CE_2022 <- function() {
@@ -374,7 +362,6 @@ download_Governador_CE_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_DF_2014()
 #' @export
 download_Governador_DF_2014 <- function() {
@@ -388,7 +375,6 @@ download_Governador_DF_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_DF_2018()
 #' @export
 download_Governador_DF_2018 <- function() {
@@ -402,7 +388,6 @@ download_Governador_DF_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_DF_2022()
 #' @export
 download_Governador_DF_2022 <- function() {
@@ -416,7 +401,6 @@ download_Governador_DF_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_ES_2014()
 #' @export
 download_Governador_ES_2014 <- function() {
@@ -430,7 +414,6 @@ download_Governador_ES_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_ES_2018()
 #' @export
 download_Governador_ES_2018 <- function() {
@@ -444,7 +427,6 @@ download_Governador_ES_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_ES_2022()
 #' @export
 download_Governador_ES_2022 <- function() {
@@ -458,7 +440,6 @@ download_Governador_ES_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_GO_2014()
 #' @export
 download_Governador_GO_2014 <- function() {
@@ -472,7 +453,6 @@ download_Governador_GO_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_GO_2018()
 #' @export
 download_Governador_GO_2018 <- function() {
@@ -486,7 +466,6 @@ download_Governador_GO_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_GO_2022()
 #' @export
 download_Governador_GO_2022 <- function() {
@@ -514,7 +493,6 @@ download_Governador_MA_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_MA_2018()
 #' @export
 download_Governador_MA_2018 <- function() {
@@ -528,7 +506,6 @@ download_Governador_MA_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_MA_2022()
 #' @export
 download_Governador_MA_2022 <- function() {
@@ -542,7 +519,6 @@ download_Governador_MA_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_MG_2014()
 #' @export
 download_Governador_MG_2014 <- function() {
@@ -556,7 +532,6 @@ download_Governador_MG_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_MG_2018()
 #' @export
 download_Governador_MG_2018 <- function() {
@@ -570,7 +545,6 @@ download_Governador_MG_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_MG_2022()
 #' @export
 download_Governador_MG_2022 <- function() {
@@ -584,7 +558,6 @@ download_Governador_MG_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_MS_2014()
 #' @export
 download_Governador_MS_2014 <- function() {
@@ -598,7 +571,6 @@ download_Governador_MS_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_MS_2018()
 #' @export
 download_Governador_MS_2018 <- function() {
@@ -612,7 +584,6 @@ download_Governador_MS_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_MS_2022()
 #' @export
 download_Governador_MS_2022 <- function() {
@@ -626,7 +597,6 @@ download_Governador_MS_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_MT_2014()
 #' @export
 download_Governador_MT_2014 <- function() {
@@ -640,7 +610,6 @@ download_Governador_MT_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_MT_2018()
 #' @export
 download_Governador_MT_2018 <- function() {
@@ -654,7 +623,6 @@ download_Governador_MT_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_MT_2022()
 #' @export
 download_Governador_MT_2022 <- function() {
@@ -668,7 +636,6 @@ download_Governador_MT_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PA_2014()
 #' @export
 download_Governador_PA_2014 <- function() {
@@ -682,7 +649,6 @@ download_Governador_PA_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PA_2018()
 #' @export
 download_Governador_PA_2018 <- function() {
@@ -696,7 +662,6 @@ download_Governador_PA_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PA_2022()
 #' @export
 download_Governador_PA_2022 <- function() {
@@ -710,7 +675,6 @@ download_Governador_PA_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PB_2014()
 #' @export
 download_Governador_PB_2014 <- function() {
@@ -724,7 +688,6 @@ download_Governador_PB_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PB_2018()
 #' @export
 download_Governador_PB_2018 <- function() {
@@ -738,7 +701,6 @@ download_Governador_PB_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PB_2022()
 #' @export
 download_Governador_PB_2022 <- function() {
@@ -752,7 +714,6 @@ download_Governador_PB_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PE_2014()
 #' @export
 download_Governador_PE_2014 <- function() {
@@ -766,7 +727,6 @@ download_Governador_PE_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PE_2022()
 #' @export
 download_Governador_PE_2022 <- function() {
@@ -780,7 +740,6 @@ download_Governador_PE_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PI_2014()
 #' @export
 download_Governador_PI_2014 <- function() {
@@ -794,7 +753,6 @@ download_Governador_PI_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PI_2018()
 #' @export
 download_Governador_PI_2018 <- function() {
@@ -808,7 +766,6 @@ download_Governador_PI_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PI_2022()
 #' @export
 download_Governador_PI_2022 <- function() {
@@ -822,7 +779,6 @@ download_Governador_PI_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PR_2014()
 #' @export
 download_Governador_PR_2014 <- function() {
@@ -836,7 +792,6 @@ download_Governador_PR_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PR_2018()
 #' @export
 download_Governador_PR_2018 <- function() {
@@ -850,7 +805,6 @@ download_Governador_PR_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_PR_2022()
 #' @export
 download_Governador_PR_2022 <- function() {
@@ -864,7 +818,6 @@ download_Governador_PR_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RJ_2014()
 #' @export
 download_Governador_RJ_2014 <- function() {
@@ -878,7 +831,6 @@ download_Governador_RJ_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RJ_2018()
 #' @export
 download_Governador_RJ_2018 <- function() {
@@ -892,7 +844,6 @@ download_Governador_RJ_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RJ_2022()
 #' @export
 download_Governador_RJ_2022 <- function() {
@@ -906,7 +857,6 @@ download_Governador_RJ_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RN_2014()
 #' @export
 download_Governador_RN_2014 <- function() {
@@ -920,7 +870,6 @@ download_Governador_RN_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RN_2018()
 #' @export
 download_Governador_RN_2018 <- function() {
@@ -934,7 +883,6 @@ download_Governador_RN_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RN_2022()
 #' @export
 download_Governador_RN_2022 <- function() {
@@ -948,7 +896,6 @@ download_Governador_RN_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RO_2014()
 #' @export
 download_Governador_RO_2014 <- function() {
@@ -962,7 +909,6 @@ download_Governador_RO_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RO_2018()
 #' @export
 download_Governador_RO_2018 <- function() {
@@ -976,7 +922,6 @@ download_Governador_RO_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RO_2022()
 #' @export
 download_Governador_RO_2022 <- function() {
@@ -990,7 +935,6 @@ download_Governador_RO_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RR_2018()
 #' @export
 download_Governador_RR_2018 <- function() {
@@ -1004,7 +948,6 @@ download_Governador_RR_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RR_2022()
 #' @export
 download_Governador_RR_2022 <- function() {
@@ -1018,7 +961,6 @@ download_Governador_RR_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RS_2014()
 #' @export
 download_Governador_RS_2014 <- function() {
@@ -1032,7 +974,6 @@ download_Governador_RS_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RS_2018()
 #' @export
 download_Governador_RS_2018 <- function() {
@@ -1046,7 +987,6 @@ download_Governador_RS_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_RS_2022()
 #' @export
 download_Governador_RS_2022 <- function() {
@@ -1060,7 +1000,6 @@ download_Governador_RS_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_SC_2014()
 #' @export
 download_Governador_SC_2014 <- function() {
@@ -1074,7 +1013,6 @@ download_Governador_SC_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_SC_2018()
 #' @export
 download_Governador_SC_2018 <- function() {
@@ -1088,7 +1026,6 @@ download_Governador_SC_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_SC_2022()
 #' @export
 download_Governador_SC_2022 <- function() {
@@ -1102,7 +1039,6 @@ download_Governador_SC_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_SE_2014()
 #' @export
 download_Governador_SE_2014 <- function() {
@@ -1116,7 +1052,6 @@ download_Governador_SE_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_SE_2018()
 #' @export
 download_Governador_SE_2018 <- function() {
@@ -1130,7 +1065,6 @@ download_Governador_SE_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_SE_2022()
 #' @export
 download_Governador_SE_2022 <- function() {
@@ -1144,7 +1078,6 @@ download_Governador_SE_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_SP_2014()
 #' @export
 download_Governador_SP_2014 <- function() {
@@ -1158,7 +1091,6 @@ download_Governador_SP_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_SP_2018()
 #' @export
 download_Governador_SP_2018 <- function() {
@@ -1172,7 +1104,6 @@ download_Governador_SP_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_SP_2022()
 #' @export
 download_Governador_SP_2022 <- function() {
@@ -1186,7 +1117,6 @@ download_Governador_SP_2022 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_TO_2014()
 #' @export
 download_Governador_TO_2014 <- function() {
@@ -1200,7 +1130,6 @@ download_Governador_TO_2014 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_TO_2018()
 #' @export
 download_Governador_TO_2018 <- function() {
@@ -1214,7 +1143,6 @@ download_Governador_TO_2018 <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Governador_TO_2022()
 #' @export
 download_Governador_TO_2022 <- function() {
@@ -1243,7 +1171,6 @@ download_Floor_001_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_002_data()
 #' @export
 download_Floor_002_data <- function() {
@@ -1257,7 +1184,6 @@ download_Floor_002_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_003_data()
 #' @export
 download_Floor_003_data <- function() {
@@ -1271,7 +1197,6 @@ download_Floor_003_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_004_data()
 #' @export
 download_Floor_004_data <- function() {
@@ -1285,7 +1210,6 @@ download_Floor_004_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_005_data()
 #' @export
 download_Floor_005_data <- function() {
@@ -1299,7 +1223,6 @@ download_Floor_005_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_006_data()
 #' @export
 download_Floor_006_data <- function() {
@@ -1313,7 +1236,6 @@ download_Floor_006_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_007_data()
 #' @export
 download_Floor_007_data <- function() {
@@ -1327,7 +1249,6 @@ download_Floor_007_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_008_data()
 #' @export
 download_Floor_008_data <- function() {
@@ -1341,7 +1262,6 @@ download_Floor_008_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_009_data()
 #' @export
 download_Floor_009_data <- function() {
@@ -1355,7 +1275,6 @@ download_Floor_009_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_010_data()
 #' @export
 download_Floor_010_data <- function() {
@@ -1369,7 +1288,6 @@ download_Floor_010_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_011_data()
 #' @export
 download_Floor_011_data <- function() {
@@ -1383,7 +1301,6 @@ download_Floor_011_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_012_data()
 #' @export
 download_Floor_012_data <- function() {
@@ -1397,7 +1314,6 @@ download_Floor_012_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_013_data()
 #' @export
 download_Floor_013_data <- function() {
@@ -1411,7 +1327,6 @@ download_Floor_013_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_014_data()
 #' @export
 download_Floor_014_data <- function() {
@@ -1425,7 +1340,6 @@ download_Floor_014_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_015_data()
 #' @export
 download_Floor_015_data <- function() {
@@ -1439,7 +1353,6 @@ download_Floor_015_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_016_data()
 #' @export
 download_Floor_016_data <- function() {
@@ -1453,7 +1366,6 @@ download_Floor_016_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_017_data()
 #' @export
 download_Floor_017_data <- function() {
@@ -1467,7 +1379,6 @@ download_Floor_017_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_018_data()
 #' @export
 download_Floor_018_data <- function() {
@@ -1481,7 +1392,6 @@ download_Floor_018_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_019_data()
 #' @export
 download_Floor_019_data <- function() {
@@ -1495,7 +1405,6 @@ download_Floor_019_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_020_data()
 #' @export
 download_Floor_020_data <- function() {
@@ -1509,7 +1418,6 @@ download_Floor_020_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_021_data()
 #' @export
 download_Floor_021_data <- function() {
@@ -1523,7 +1431,6 @@ download_Floor_021_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_022_data()
 #' @export
 download_Floor_022_data <- function() {
@@ -1537,7 +1444,6 @@ download_Floor_022_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_023_data()
 #' @export
 download_Floor_023_data <- function() {
@@ -1551,7 +1457,6 @@ download_Floor_023_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_024_data()
 #' @export
 download_Floor_024_data <- function() {
@@ -1565,7 +1470,6 @@ download_Floor_024_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_025_data()
 #' @export
 download_Floor_025_data <- function() {
@@ -1579,7 +1483,6 @@ download_Floor_025_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_026_data()
 #' @export
 download_Floor_026_data <- function() {
@@ -1593,7 +1496,6 @@ download_Floor_026_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_027_data()
 #' @export
 download_Floor_027_data <- function() {
@@ -1607,7 +1509,6 @@ download_Floor_027_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_028_data()
 #' @export
 download_Floor_028_data <- function() {
@@ -1621,7 +1522,6 @@ download_Floor_028_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_029_data()
 #' @export
 download_Floor_029_data <- function() {
@@ -1635,7 +1535,6 @@ download_Floor_029_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_030_data()
 #' @export
 download_Floor_030_data <- function() {
@@ -1649,7 +1548,6 @@ download_Floor_030_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_031_data()
 #' @export
 download_Floor_031_data <- function() {
@@ -1663,7 +1561,6 @@ download_Floor_031_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_032_data()
 #' @export
 download_Floor_032_data <- function() {
@@ -1677,7 +1574,6 @@ download_Floor_032_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_033_data()
 #' @export
 download_Floor_033_data <- function() {
@@ -1691,7 +1587,6 @@ download_Floor_033_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_034_data()
 #' @export
 download_Floor_034_data <- function() {
@@ -1705,7 +1600,6 @@ download_Floor_034_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_035_data()
 #' @export
 download_Floor_035_data <- function() {
@@ -1719,7 +1613,6 @@ download_Floor_035_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_036_data()
 #' @export
 download_Floor_036_data <- function() {
@@ -1733,7 +1626,6 @@ download_Floor_036_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_037_data()
 #' @export
 download_Floor_037_data <- function() {
@@ -1747,7 +1639,6 @@ download_Floor_037_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_038_data()
 #' @export
 download_Floor_038_data <- function() {
@@ -1761,7 +1652,6 @@ download_Floor_038_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_039_data()
 #' @export
 download_Floor_039_data <- function() {
@@ -1775,7 +1665,6 @@ download_Floor_039_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_040_data()
 #' @export
 download_Floor_040_data <- function() {
@@ -1789,7 +1678,6 @@ download_Floor_040_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_041_data()
 #' @export
 download_Floor_041_data <- function() {
@@ -1803,7 +1691,6 @@ download_Floor_041_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_042_data()
 #' @export
 download_Floor_042_data <- function() {
@@ -1817,7 +1704,6 @@ download_Floor_042_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_043_data()
 #' @export
 download_Floor_043_data <- function() {
@@ -1831,7 +1717,6 @@ download_Floor_043_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_044_data()
 #' @export
 download_Floor_044_data <- function() {
@@ -1845,7 +1730,6 @@ download_Floor_044_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_045_data()
 #' @export
 download_Floor_045_data <- function() {
@@ -1859,7 +1743,6 @@ download_Floor_045_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_046_data()
 #' @export
 download_Floor_046_data <- function() {
@@ -1873,7 +1756,6 @@ download_Floor_046_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_047_data()
 #' @export
 download_Floor_047_data <- function() {
@@ -1887,7 +1769,6 @@ download_Floor_047_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_048_data()
 #' @export
 download_Floor_048_data <- function() {
@@ -1901,7 +1782,6 @@ download_Floor_048_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_049_data()
 #' @export
 download_Floor_049_data <- function() {
@@ -1915,7 +1795,6 @@ download_Floor_049_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_050_data()
 #' @export
 download_Floor_050_data <- function() {
@@ -1929,7 +1808,6 @@ download_Floor_050_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_051_data()
 #' @export
 download_Floor_051_data <- function() {
@@ -1943,7 +1821,6 @@ download_Floor_051_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_052_data()
 #' @export
 download_Floor_052_data <- function() {
@@ -1957,7 +1834,6 @@ download_Floor_052_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_053_data()
 #' @export
 download_Floor_053_data <- function() {
@@ -1971,7 +1847,6 @@ download_Floor_053_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_054_data()
 #' @export
 download_Floor_054_data <- function() {
@@ -1985,7 +1860,6 @@ download_Floor_054_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_055_data()
 #' @export
 download_Floor_055_data <- function() {
@@ -1999,7 +1873,6 @@ download_Floor_055_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_056_data()
 #' @export
 download_Floor_056_data <- function() {
@@ -2013,7 +1886,6 @@ download_Floor_056_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_057_data()
 #' @export
 download_Floor_057_data <- function() {
@@ -2027,7 +1899,6 @@ download_Floor_057_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_058_data()
 #' @export
 download_Floor_058_data <- function() {
@@ -2041,7 +1912,6 @@ download_Floor_058_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_059_data()
 #' @export
 download_Floor_059_data <- function() {
@@ -2055,7 +1925,6 @@ download_Floor_059_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_060_data()
 #' @export
 download_Floor_060_data <- function() {
@@ -2069,7 +1938,6 @@ download_Floor_060_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_061_data()
 #' @export
 download_Floor_061_data <- function() {
@@ -2083,7 +1951,6 @@ download_Floor_061_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_062_data()
 #' @export
 download_Floor_062_data <- function() {
@@ -2097,7 +1964,6 @@ download_Floor_062_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_063_data()
 #' @export
 download_Floor_063_data <- function() {
@@ -2111,7 +1977,6 @@ download_Floor_063_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_064_data()
 #' @export
 download_Floor_064_data <- function() {
@@ -2125,7 +1990,6 @@ download_Floor_064_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_065_data()
 #' @export
 download_Floor_065_data <- function() {
@@ -2139,7 +2003,6 @@ download_Floor_065_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_066_data()
 #' @export
 download_Floor_066_data <- function() {
@@ -2153,7 +2016,6 @@ download_Floor_066_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_067_data()
 #' @export
 download_Floor_067_data <- function() {
@@ -2167,7 +2029,6 @@ download_Floor_067_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_068_data()
 #' @export
 download_Floor_068_data <- function() {
@@ -2181,7 +2042,6 @@ download_Floor_068_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_069_data()
 #' @export
 download_Floor_069_data <- function() {
@@ -2195,7 +2055,6 @@ download_Floor_069_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_070_data()
 #' @export
 download_Floor_070_data <- function() {
@@ -2209,7 +2068,6 @@ download_Floor_070_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_071_data()
 #' @export
 download_Floor_071_data <- function() {
@@ -2223,7 +2081,6 @@ download_Floor_071_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_072_data()
 #' @export
 download_Floor_072_data <- function() {
@@ -2237,7 +2094,6 @@ download_Floor_072_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_073_data()
 #' @export
 download_Floor_073_data <- function() {
@@ -2251,7 +2107,6 @@ download_Floor_073_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_074_data()
 #' @export
 download_Floor_074_data <- function() {
@@ -2265,7 +2120,6 @@ download_Floor_074_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_075_data()
 #' @export
 download_Floor_075_data <- function() {
@@ -2279,7 +2133,6 @@ download_Floor_075_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_076_data()
 #' @export
 download_Floor_076_data <- function() {
@@ -2293,7 +2146,6 @@ download_Floor_076_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_077_data()
 #' @export
 download_Floor_077_data <- function() {
@@ -2307,7 +2159,6 @@ download_Floor_077_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_078_data()
 #' @export
 download_Floor_078_data <- function() {
@@ -2321,7 +2172,6 @@ download_Floor_078_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_079_data()
 #' @export
 download_Floor_079_data <- function() {
@@ -2335,7 +2185,6 @@ download_Floor_079_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_080_data()
 #' @export
 download_Floor_080_data <- function() {
@@ -2349,7 +2198,6 @@ download_Floor_080_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_081_data()
 #' @export
 download_Floor_081_data <- function() {
@@ -2363,7 +2211,6 @@ download_Floor_081_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_082_data()
 #' @export
 download_Floor_082_data <- function() {
@@ -2377,7 +2224,6 @@ download_Floor_082_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_083_data()
 #' @export
 download_Floor_083_data <- function() {
@@ -2391,7 +2237,6 @@ download_Floor_083_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_084_data()
 #' @export
 download_Floor_084_data <- function() {
@@ -2405,7 +2250,6 @@ download_Floor_084_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_085_data()
 #' @export
 download_Floor_085_data <- function() {
@@ -2419,7 +2263,6 @@ download_Floor_085_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_086_data()
 #' @export
 download_Floor_086_data <- function() {
@@ -2433,7 +2276,6 @@ download_Floor_086_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_087_data()
 #' @export
 download_Floor_087_data <- function() {
@@ -2447,7 +2289,6 @@ download_Floor_087_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_088_data()
 #' @export
 download_Floor_088_data <- function() {
@@ -2461,7 +2302,6 @@ download_Floor_088_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_089_data()
 #' @export
 download_Floor_089_data <- function() {
@@ -2475,7 +2315,6 @@ download_Floor_089_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_090_data()
 #' @export
 download_Floor_090_data <- function() {
@@ -2489,7 +2328,6 @@ download_Floor_090_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Floor_091_data()
 #' @export
 download_Floor_091_data <- function() {
@@ -2519,7 +2357,6 @@ download_CPICovid_003_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_CPICovid_003_data()
 #' @export
 download_CPICovid_003_data <- function() {
@@ -2534,7 +2371,6 @@ download_CPICovid_003_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_CPICovid_003_data()
 #' @export
 download_CPICovid_003_data <- function() {
@@ -2549,7 +2385,6 @@ download_CPICovid_003_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_CPICovid_003_data()
 #' @export
 download_CPICovid_002_data <- function() {
@@ -2579,7 +2414,6 @@ download_CPICovid_001_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_016_data()
 #' @export
 download_Committees_016_data <- function() {
@@ -2593,7 +2427,6 @@ download_Committees_016_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_015_data()
 #' @export
 download_Committees_015_data <- function() {
@@ -2621,7 +2454,6 @@ download_Committees_014_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_013_data()
 #' @export
 download_Committees_013_data <- function() {
@@ -2635,7 +2467,6 @@ download_Committees_013_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_012_data()
 #' @export
 download_Committees_012_data <- function() {
@@ -2649,7 +2480,6 @@ download_Committees_012_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_011_data()
 #' @export
 download_Committees_011_data <- function() {
@@ -2663,7 +2493,6 @@ download_Committees_011_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_010_data()
 #' @export
 download_Committees_010_data <- function() {
@@ -2677,7 +2506,6 @@ download_Committees_010_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_009_data()
 #' @export
 download_Committees_009_data <- function() {
@@ -2691,7 +2519,6 @@ download_Committees_009_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_008_data()
 #' @export
 download_Committees_008_data <- function() {
@@ -2705,7 +2532,6 @@ download_Committees_008_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_007_data()
 #' @export
 download_Committees_007_data <- function() {
@@ -2719,7 +2545,6 @@ download_Committees_007_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_006_data()
 #' @export
 download_Committees_006_data <- function() {
@@ -2733,7 +2558,6 @@ download_Committees_006_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_005_data()
 #' @export
 download_Committees_005_data <- function() {
@@ -2747,7 +2571,6 @@ download_Committees_005_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_004_data()
 #' @export
 download_Committees_004_data <- function() {
@@ -2761,7 +2584,6 @@ download_Committees_004_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_003_data()
 #' @export
 download_Committees_003_data <- function() {
@@ -2775,7 +2597,6 @@ download_Committees_003_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_002_data()
 #' @export
 download_Committees_002_data <- function() {
@@ -2789,7 +2610,6 @@ download_Committees_002_data <- function() {
 #' Downloads the dataset from the specified URL and imports it as a data frame.
 #'
 #' @return A data frame containing the dataset.
-#' @examples
 #' df <- download_Committees_001_data()
 #' @export
 download_Committees_001_data <- function() {

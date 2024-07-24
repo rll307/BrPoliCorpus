@@ -39,7 +39,7 @@ Each module is distributed as a CSV files containing the text and a lot of metad
 
 This date is available in both CSV for free download and as a set of R commands for integrating data into R environment.
 
-- Availability on CSV data might be [found here](CSV_Download.md). 
+- Availability on CSV data might be [found here](doc/CSV_Download.md). 
 - The R package has a set of functions responsible for downloading specific pieces of data. Please, see the [vignette](vignettes/) for a more detailed discussion.
 
 ## R package

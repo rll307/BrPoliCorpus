@@ -8,10 +8,8 @@ download_CPICovid_002_data()
 }
 \value{
 A data frame containing the dataset.
+df <- download_CPICovid_003_data()
 }
 \description{
 Downloads the dataset from the specified URL and imports it as a data frame.
-}
-\examples{
-df <- download_CPICovid_003_data()
 }

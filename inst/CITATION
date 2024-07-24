@@ -1,12 +1,11 @@
-## R package reference generated from DESCRIPTION metadata
-citation(auto = meta)
+citHeader("To cite the BrPoliCorpus package in publications, please use:")
 
-## Software
+bibentry(
+  bibtype = "Misc",
+  title = "BrPoliCorpus: Brazilian Political Corpus - Version 1.0.0.0",
+  author = person(given = "Rodrigo Esteves", family = "de Lima-Lopes"),
+  url = "https://github.com/rll307/BrPoliCorpus.git",
+  year = "2024"
+)
 
-bibentry(bibtype = "software",
-  author = c(person("Rodrigo Esteves", "de Lima-Lopes")),
-  title = "BrPoliCorpus: Brazilian Political Corpus",
-  url = {https://github.com/rll307/BrPoliCorpus.git},
-  version = "1.0",
-  year = "2024",
-}
+citFooter("Please contact rll307@unicamp.br for any questions.")

@@ -8,10 +8,8 @@ download_Governador_GO_2022()
 }
 \value{
 A data frame containing the dataset.
+df <- download_Governador_GO_2022()
 }
 \description{
 Downloads the dataset from the specified URL and imports it as a data frame.
-}
-\examples{
-df <- download_Governador_GO_2022()
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_downloader.R
 \name{download_index}
 \alias{download_index}
-\title{Download Three CSV Files from Google Drive and Import as Data Frames}
+\title{#' Download and Import Multiple CSV Files}
 \usage{
 download_index(
   url1,
@@ -10,8 +10,9 @@ download_index(
   url3,
   url4,
   url5,
-  names = c("IndexProgrammes", "IndexInauguralSpeeches", "IndexFloorPlenaries",
-    "IndexCPI", "IndexCommittees", "GeneralIndex"),
+  url6,
+  names = c("IndexFunctions", "IndexCommittees", "IndexCPI", "IndexFilesFloor",
+    "IndexInaugural", "IndexProposals"),
   env = .GlobalEnv
 )
 }
@@ -22,25 +23,33 @@ download_index(
 
 \item{url3}{The URL of the third dataset.}
 
-\item{url4}{The URL of the third dataset.}
+\item{url4}{The URL of the fourth dataset.}
 
-\item{url5}{The URL of the third dataset.}
+\item{url5}{The URL of the fifth dataset.}
+
+\item{url6}{The URL of the sixth dataset.}
 
 \item{names}{A vector of names for the data frames.}
 
 \item{env}{The environment where the data frames will be created. Defaults to the global environment.}
 }
 \description{
-Downloads three CSV files from specified Google Drive URLs and imports them as data frames.
+Downloads six CSV files from specified Google Drive URLs and imports them as data frames into the specified environment.
 }
 \examples{
 download_index(
-"https://drive.google.com/uc?export=download&id=1dhpEzzUNm4Eufs2v3XIbG8sv6AwPXonm",
- "https://drive.google.com/uc?export=download&id=1E09VqeMx6eRVUwfJHI06cxiyxvZbvCo1",
- "https://drive.google.com/uc?export=download&id=1O0g1iN1dH-mx9mStFNmPtjn1tFZh5uxi",
- "https://drive.google.com/uc?export=download&id=1LGxgtABI01PcWhgCqbOucb-PV6jJSSWA",
- "https://drive.google.com/uc?export=download&id=13ZhnyjZv_vfy20i_z7Mlgj30NkOOZF-a",
- "https://drive.google.com/uc?export=download&id=1FKdY0fQLyClxFALYuBl-t-JU7PPojX0u"
- names = c("IndexProgrammes", "IndexInauguralSpeeches", "IndexFloorPlenaries", "IndexCPI","IndexCommittees","GeneralIndex")
+  "https://drive.google.com/uc?export=download&id=1FKdY0fQLyClxFALYuBl-t-JU7PPojX0u",
+  "https://drive.google.com/uc?export=download&id=13ZhnyjZv_vfy20i_z7Mlgj30NkOOZF-a",
+  "https://drive.google.com/uc?export=download&id=1LGxgtABI01PcWhgCqbOucb-PV6jJSSWA",
+  "https://drive.google.com/uc?export=download&id=1O0g1iN1dH-mx9mStFNmPtjn1tFZh5uxi",
+  "https://drive.google.com/uc?export=download&id=1E09VqeMx6eRVUwfJHI06cxiyxvZbvCo1",
+  "https://drive.google.com/uc?export=download&id=1dhpEzzUNm4Eufs2v3XIbG8sv6AwPXonm",
+  names = c(
+"IndexFunctions", 
+"IndexCommittees",
+ "IndexCPI", 
+"IndexFilesFloor", 
+"IndexInaugural",
+"IndexProposals")
 )
 }
