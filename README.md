@@ -22,14 +22,14 @@ For the current time, the following datasets are available:
 
 ### Corpus size
 
-| Doc                          | Types      | Tokens      |
-|------------------------------|------------|-------------|
-| CPI                          | 2615392    | 4563382     |
-| Parliamentary Committees     | 7985000    | 108251624   |
-| Floor Parliamentary speeches | 3423405    | 322893136   |
-| Gov. Programmes              | 688342     | 5849807     |
-| Inaugural Speeches           | 31959      | 86206       |
-| Total                        | 14.744.098 | 441.644.155 |
+        | Doc                          | Types      | Tokens      |
+        |------------------------------|------------|-------------|
+        | CPI                          | 2615392    | 4563382     |
+        | Parliamentary Committees     | 7985000    | 108251624   |
+        | Floor Parliamentary speeches | 3423405    | 322893136   |
+        | Gov. Programmes              | 688342     | 5849807     |
+        | Inaugural Speeches           | 31959      | 86206       |
+        | Total                        | 14.744.098 | 441.644.155 |
 
 
 ## Availability
@@ -84,7 +84,7 @@ The following researchers have contributed to this corpus:
    - Coding, data scraping
 - [Dariia Shamgunova][def4]  (TU-Darmstadt)
    - Coding, data scraping
-- [Rodrigo Dornelles][def5] (Independent Researcher)
+- [Rodrigo Dornelles][def5] (MsC Candiate at   Hertie School)
    - Coding, data scraping
 ## Acknowledgments
 
@@ -105,4 +105,4 @@ I would like to acknowledge CAPES and Alexander Humboldt Foundation for financin
 [def2]: mailto:stegmeier@linglit.tu-darmstadt.de
 [def3]: mailto:ni.yan@tu-darmstadt.de
 [def4]: mailto:dariia.shamgunova@stud.tu-darmstadt.de
-[def5]: https://www.linkedin.com/in/rfdornelles/ 
+[def5]: https://orcid.org/0000-0003-3709-4760
