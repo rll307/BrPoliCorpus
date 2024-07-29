@@ -22,14 +22,14 @@ For the current time, the following datasets are available:
 
 ### Corpus size
 
-        | Doc                          | Types      | Tokens      |
-        |------------------------------|------------|-------------|
-        | CPI                          | 2615392    | 4563382     |
-        | Parliamentary Committees     | 7985000    | 108251624   |
-        | Floor Parliamentary speeches | 3423405    | 322893136   |
-        | Gov. Programmes              | 688342     | 5849807     |
-        | Inaugural Speeches           | 31959      | 86206       |
-        | Total                        | 14.744.098 | 441.644.155 |
+| Doc                          | Types      | Tokens      |
+|------------------------------|------------|-------------|
+| CPI                          | 2615392    | 4563382     |
+| Parliamentary Committees     | 7985000    | 108251624   |
+| Floor Parliamentary speeches | 3423405    | 322893136   |
+| Gov. Programmes              | 688342     | 5849807     |
+| Inaugural Speeches           | 31959      | 86206       |
+| Total                        | 14.744.098 | 441.644.155 |
 
 
 ## Availability
