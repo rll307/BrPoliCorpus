@@ -104,5 +104,5 @@ I would like to acknowledge CAPES and Alexander Humboldt Foundation for financin
 [def]: mailto:rll307@unicamp.br
 [def2]: mailto:stegmeier@linglit.tu-darmstadt.de
 [def3]: mailto:ni.yan@tu-darmstadt.de
-[def4]: mailto:dariia.shamgunova@stud.tu-darmstadt.de
+[def4]: https://github.com/dariyash
 [def5]: https://orcid.org/0000-0003-3709-4760
