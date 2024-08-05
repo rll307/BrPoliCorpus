@@ -91,7 +91,7 @@ The following researchers have contributed to this corpus:
 I would like to acknowledge CAPES and Alexander Humboldt Foundation for financing this version of this Corpus. To all the team of TU-Darmstadt who made this project possible.
 
 
-## How to cite:
+## How to cite
 
     @software{BrPoliCorpus,
       author = {Rodrigo Esteves {de Lima-Lopes}},
