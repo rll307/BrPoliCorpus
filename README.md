@@ -4,7 +4,7 @@ by [Rodrigo Esteves de Lima-Lopes][def] (Universidade Estadual de Campinas)
 
 ## Introduction
 
-This is the version 1.0 of the package **BrPoliCorpus** (Brazilian Political Corpus). It is intended to be a free repository of open data regarding official documents of Brazilian Politics. This is part of my project of creating a comprehensive and freely available corpus of Brazilian Portuguese political 
+This is the version 1.0 of the package **BrPoliCorpus** (Brazilian Political Corpus). It is intended to be a free repository of open data regarding official documents of Brazilian Politics.
 
 ## Data
 
