@@ -2,14 +2,16 @@
 % Please edit documentation in R/data_downloader.R
 \name{download_CPICovid_002_data}
 \alias{download_CPICovid_002_data}
-\title{Download CPICovid_003_data Dataset}
+\title{Download CPICovid_002_data Dataset}
 \usage{
 download_CPICovid_002_data()
 }
 \value{
 A data frame containing the dataset.
-df <- download_CPICovid_003_data()
 }
 \description{
 Downloads the dataset from the specified URL and imports it as a data frame.
+}
+\examples{
+df <- download_CPICovid_002_data()
 }

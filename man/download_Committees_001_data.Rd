@@ -8,8 +8,10 @@ download_Committees_001_data()
 }
 \value{
 A data frame containing the dataset.
-df <- download_Committees_001_data()
 }
 \description{
 Downloads the dataset from the specified URL and imports it as a data frame.
+}
+\examples{
+df <- download_Committees_001_data()
 }

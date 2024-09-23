@@ -8,8 +8,10 @@ download_Floor_090_data()
 }
 \value{
 A data frame containing the dataset.
-df <- download_Floor_090_data()
 }
 \description{
 Downloads the dataset from the specified URL and imports it as a data frame.
+}
+\examples{
+df <- download_Floor_090_data()
 }
