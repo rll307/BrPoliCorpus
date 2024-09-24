@@ -24,11 +24,11 @@ For the current time, the following datasets are available:
 
 | Doc                          | Types   | Tokens    | Texts  |
 |------------------------------|---------|-----------|--------|
-| CPI                          | 128089  | 3767972   | 75182  |
-| Parliamentary Committees     | 386534  | 91466136  | 2565   |
-| Floor Parliamentary speeches | 1187492 | 367557793 | 434646 |
-| Gov. Programmes              | 218783  | 11158384  | 1120   |
-| Inaugural Speeches           | 15103   | 75918     | 35     |
+| CPI                          | 128.089  | 3.767.972   | 75.182  |
+| Parliamentary Committees     | 386.534  | 91466136  | 2.565   |
+| Floor Parliamentary speeches | 1187.492 | 367.557.793 | 434.646 |
+| Gov. Programmes              | 218.783  | 11.158.384  | 1.120   |
+| Inaugural Speeches           | 15.103   | 75.918     | 35     |
 | Total                        |19.36001 | 474.026.203| 51.3548|
 
 ## Availability
