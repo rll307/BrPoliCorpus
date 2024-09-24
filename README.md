@@ -12,8 +12,8 @@ For the current time, the following datasets are available:
 
 - Inaugural Speeches: A set of Brazilian President's Inaugural Speeches.
   - Updated until 01/01/2023
-- Parliamentary Floor: A set of all parliamentary discourses available from October/2000 until December 2023.
-  - Updated until 01/07/2024
+- Parliamentary Floor: A set of all parliamentary discourses available from October/2000.
+  - Updated until 31/12/2023
 - Governmental Programmes: A set of candidates programmes for the Brazilian Elections. From 2014 on.
   - Updated until 01/07/2024
 - CPI: Brazilian Parliamentary Inquire Commission.
