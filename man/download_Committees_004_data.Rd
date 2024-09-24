@@ -2,15 +2,15 @@
 % Please edit documentation in R/Committees.R
 \name{download_Committees_004_data}
 \alias{download_Committees_004_data}
-\title{Download Committees_004_data Dataset}
+\title{Baixar Dataset Committees_004_data}
 \usage{
 download_Committees_004_data()
 }
 \value{
-A data frame containing the dataset.
+Um dataframe contendo o dataset.
 }
 \description{
-Downloads the dataset from Google Drive and imports it as a data frame.
+Baixa o dataset do Google Drive e o importa como um dataframe.
 }
 \examples{
 df <- download_Committees_004_data()

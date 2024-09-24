@@ -2,15 +2,15 @@
 % Please edit documentation in R/Inaugural.R
 \name{download_InauguralSpeeches}
 \alias{download_InauguralSpeeches}
-\title{Download InauguralSpeeches Dataset}
+\title{Baixar Dataset InauguralSpeeches}
 \usage{
 download_InauguralSpeeches()
 }
 \value{
-A data frame containing the dataset.
+Um dataframe contendo o dataset.
 }
 \description{
-Downloads the dataset from Google Drive and imports it as a data frame.
+Baixa o dataset do Google Drive e o importa como um dataframe.
 }
 \examples{
 df <- download_InauguralSpeeches()

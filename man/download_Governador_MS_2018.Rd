@@ -2,15 +2,15 @@
 % Please edit documentation in R/Programas.R
 \name{download_Governador_MS_2018}
 \alias{download_Governador_MS_2018}
-\title{Download Governador_MS_2018 Dataset}
+\title{Baixar Dataset Governador_MS_2018}
 \usage{
 download_Governador_MS_2018()
 }
 \value{
-A data frame containing the dataset.
+Um dataframe contendo o dataset.
 }
 \description{
-Downloads the dataset from Google Drive and imports it as a data frame.
+Baixa o dataset do Google Drive e o importa como um dataframe.
 }
 \examples{
 df <- download_Governador_MS_2018()

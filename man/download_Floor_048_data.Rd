@@ -2,15 +2,15 @@
 % Please edit documentation in R/Floor.R
 \name{download_Floor_048_data}
 \alias{download_Floor_048_data}
-\title{Download Floor_048_data Dataset}
+\title{Baixar Dataset Floor_048_data}
 \usage{
 download_Floor_048_data()
 }
 \value{
-A data frame containing the dataset.
+Um dataframe contendo o dataset.
 }
 \description{
-Downloads the dataset from Google Drive and imports it as a data frame.
+Baixa o dataset do Google Drive e o importa como um dataframe.
 }
 \examples{
 df <- download_Floor_048_data()

@@ -1,11 +1,11 @@
-# This file contains download functions for datasets
+# Este arquivo contém funções para baixar datasets
 
 
-#' Download InauguralSpeeches Dataset
+#' Baixar Dataset InauguralSpeeches
 #'
-#' Downloads the dataset from Google Drive and imports it as a data frame.
+#' Baixa o dataset do Google Drive e o importa como um dataframe.
 #'
-#' @return A data frame containing the dataset.
+#' @return Um dataframe contendo o dataset.
 #' @examples
 #' df <- download_InauguralSpeeches()
 #' @export
