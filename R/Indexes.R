@@ -60,9 +60,9 @@ download_index <- function(
   # Define the URLs and names
   urls <- c(
     "https://drive.google.com/uc?export=download&id=1FKdY0fQLyClxFALYuBl-t-JU7PPojX0u",
-    "https://drive.google.com/uc?export=download&id=13ZhnyjZv_vfy20i_z7Mlgj30NkOOZF-a",
+    "https://drive.google.com/uc?id=11SuGCVw14WZ53CkcQmOnRn7uItGtgHvC",
     "https://drive.google.com/uc?export=download&id=1LGxgtABI01PcWhgCqbOucb-PV6jJSSWA",
-    "https://drive.google.com/uc?id=1rI0njusz_9_fxpK2DBniKwhoxs44zjTK",
+    "https://drive.google.com/uc?id=1GmTNDY0xDBetZMZzaw9remuqs-xtttIS",
     "https://drive.google.com/uc?export=download&id=1E09VqeMx6eRVUwfJHI06cxiyxvZbvCo1",
     "https://drive.google.com/uc?export=download&id=1dhpEzzUNm4Eufs2v3XIbG8sv6AwPXonm")
   
