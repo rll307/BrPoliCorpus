@@ -96,6 +96,7 @@ I would like to acknowledge CAPES and Alexander Humboldt Foundation for financin
       author = {Rodrigo Esteves {de Lima-Lopes}},
       title = {BrPoliCorpus: Brazilian Political Corpus},
       url = {https://github.com/rll307/BrPoliCorpus.git},
+      DOI = {https://doi.org/10.25824/redu/YCFPIV}
       version = {1.0},
       date = {2024-7-01},
     }
