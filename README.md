@@ -87,7 +87,7 @@ The following researchers have contributed to this corpus:
    - Coding, data scraping
 ## Acknowledgments
 
-I would like to acknowledge CAPES and Alexander Humboldt Foundation for financing this version of this Corpus. To all the team of TU-Darmstadt who made this project possible.
+I would like to acknowledge CAPES, Alexander Humboldt Foundation and CNPq (311099/2021-1) for financing this version of this Corpus. To all the team of TU-Darmstadt who made this project possible.
 
 
 ## How to cite
